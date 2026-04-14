@@ -223,7 +223,7 @@ export default function WeddingJourney() {
       
         <div className="flex flex-col md:flex-row gap-4 w-full max-w-xl px-4">
           <a 
-            href="YOUR_GOOGLE_MAPS_LINK" 
+            href="https://maps.app.goo.gl/kBZDpCYQviMytdCJ8" 
             target="_blank" 
             className="flex-1 flex items-center justify-center gap-2 py-5 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-bold tracking-[0.2em] text-[10px] uppercase transition-all shadow-lg active:scale-95"
           >

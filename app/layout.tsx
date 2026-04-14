@@ -13,10 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kichu & Keerthana | Wedding Invitation",
+  title: "Kishore & Keerthana | Wedding Invitation",
   description: "Join us in celebrating our love on July 5, 2026",
+  icons: {
+    icon: "/marriage_invitation/icon.png", // Explicit path with repo name
+    apple: "/marriage_invitation/icon.png",
+  },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

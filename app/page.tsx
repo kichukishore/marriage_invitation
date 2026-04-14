@@ -149,7 +149,7 @@ const downloadInvite = async () => {
               <div className="absolute inset-0 bg-black/20" />
             </div>
             <div className="w-full md:w-1/2">
-              <p className="text-amber-500 font-medium tracking-widest text-xs mb-4 uppercase">June 3, 2019</p>
+              <p className="text-amber-500 font-medium tracking-widest text-xs mb-4 uppercase">March 30, 2019 Our First Picture</p>
               <h3 className="text-4xl md:text-5xl font-light mb-6 text-neutral-100 italic">The First Glance.</h3>
               <p className="text-neutral-400 font-light leading-relaxed text-lg">
                 The day our adult lives truly aligned. One photo that captured the spark of a thousand memories yet to come.

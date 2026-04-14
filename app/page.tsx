@@ -23,27 +23,25 @@ export default function WeddingJourney() {
   };
 
   // --- IMPROVED DOWNLOAD FUNCTION (Mobile & Desktop Friendly) ---
-  const downloadInvite = async () => {
+const downloadInvite = async () => {
     if (containerRef.current === null) return;
     setIsDownloading(true);
     
     try {
-      // 1. Give animations and images a moment to settle
       await new Promise(resolve => setTimeout(resolve, 800));
 
-      // 2. Capture the full container
-      const dataUrl = await toPng(containerRef.current, { 
+      // Cast to 'any' to bypass the missing type definition for CORS/Query params
+      const options: any = {
         cacheBust: true,
-        useCORS: true, // Critical for GitHub Pages images
-        backgroundColor: '#0a0a0a', // Ensures background isn't transparent
+        backgroundColor: '#0a0a0a',
         style: {
-          borderRadius: '0', // Clean edges for the final image
+          borderRadius: '0',
         },
-        // Quality setting for better mobile viewing
-        pixelRatio: 2, 
-      });
+        pixelRatio: 2,
+      };
 
-      // 3. Trigger download
+      const dataUrl = await toPng(containerRef.current, options);
+
       const link = document.createElement('a');
       link.download = 'Kishore-Keerthana-Wedding.png';
       link.href = dataUrl;
@@ -53,7 +51,7 @@ export default function WeddingJourney() {
       
     } catch (error) {
       console.error('Download failed:', error);
-      alert("Unable to download image. If you're on a mobile browser (like WhatsApp/Instagram), please open this link in Chrome or Safari.");
+      alert("Unable to download image. Please try using Chrome or Safari.");
     } finally {
       setIsDownloading(false);
     }

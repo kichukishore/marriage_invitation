@@ -61,7 +61,7 @@ export default function WeddingJourney() {
     <div ref={containerRef} className="relative bg-[#0a0a0a] text-white selection:bg-amber-200 selection:text-black overflow-x-hidden">
       
       {/* --- AUDIO ELEMENT --- */}
-      <audio ref={audioRef} loop src="/wedding-music.mp3" />
+      <audio ref={audioRef} loop src="/marriage_invitation/wedding-music.mp3" />
 
       {/* --- MUSIC FLOATING BUTTON --- */}
       <div className="fixed top-6 right-6 z-50">
@@ -76,7 +76,7 @@ export default function WeddingJourney() {
       {/* --- FLOATING LOGO (image3) --- */}
       <div className="fixed top-6 left-6 z-50">
         <img 
-          src="/image3.png" 
+          src="/marriage_invitation/image3.png" 
           alt="Logo" 
           className="w-12 h-12 md:w-16 md:h-16 object-contain rounded-full border border-white/10 backdrop-blur-md"
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
@@ -139,7 +139,7 @@ export default function WeddingJourney() {
             className="flex flex-col md:flex-row items-center gap-12 md:gap-24"
           >
             <div className="w-full md:w-1/2 aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl relative group">
-              <img src="/image1.png" alt="First Sight" className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" />
+              <img src="/marriage_invitation/image1.png" alt="First Sight" className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20" />
             </div>
             <div className="w-full md:w-1/2">
@@ -164,7 +164,7 @@ export default function WeddingJourney() {
               </p>
             </div>
             <div className="w-full md:w-1/2 aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-2xl relative group">
-              <img src="/image2.png" alt="Engagement" className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" />
+              <img src="/marriage_invitation/image2.png" alt="Engagement" className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/20" />
             </div>
           </motion.div>
@@ -220,7 +220,7 @@ export default function WeddingJourney() {
           </div>
         </div>
 
-        {/* --- ACTION BUTTONS --- */}
+      
         <div className="flex flex-col md:flex-row gap-4 w-full max-w-xl px-4">
           <a 
             href="YOUR_GOOGLE_MAPS_LINK" 

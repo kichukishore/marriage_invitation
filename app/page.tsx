@@ -6,7 +6,6 @@ import { toPng } from 'html-to-image';
 
 export default function WeddingJourney() {
   const containerRef = useRef<HTMLDivElement>(null);
-  // inviteRef is now attached to the main containerRef
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -23,26 +22,38 @@ export default function WeddingJourney() {
     }
   };
 
-  // --- FULL PAGE DOWNLOAD FUNCTION ---
+  // --- IMPROVED DOWNLOAD FUNCTION (Mobile & Desktop Friendly) ---
   const downloadInvite = async () => {
     if (containerRef.current === null) return;
     setIsDownloading(true);
     
     try {
-      // Small delay to ensure all assets are loaded and animations are stable
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // 1. Give animations and images a moment to settle
+      await new Promise(resolve => setTimeout(resolve, 800));
 
+      // 2. Capture the full container
       const dataUrl = await toPng(containerRef.current, { 
         cacheBust: true,
-        // Optional: you can set quality and style if needed
-        quality: 1
+        useCORS: true, // Critical for GitHub Pages images
+        backgroundColor: '#0a0a0a', // Ensures background isn't transparent
+        style: {
+          borderRadius: '0', // Clean edges for the final image
+        },
+        // Quality setting for better mobile viewing
+        pixelRatio: 2, 
       });
+
+      // 3. Trigger download
       const link = document.createElement('a');
-      link.download = 'Kishore-Keerthana-Wedding-Journey.png';
+      link.download = 'Kishore-Keerthana-Wedding.png';
       link.href = dataUrl;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+      
     } catch (error) {
-      console.error('oops, something went wrong!', error);
+      console.error('Download failed:', error);
+      alert("Unable to download image. If you're on a mobile browser (like WhatsApp/Instagram), please open this link in Chrome or Safari.");
     } finally {
       setIsDownloading(false);
     }
@@ -57,7 +68,6 @@ export default function WeddingJourney() {
   const opacityProgress = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
-    // FIX: inviteRef and containerRef are the same element now
     <div ref={containerRef} className="relative bg-[#0a0a0a] text-white selection:bg-amber-200 selection:text-black overflow-x-hidden">
       
       {/* --- AUDIO ELEMENT --- */}
@@ -76,7 +86,7 @@ export default function WeddingJourney() {
       {/* --- FLOATING LOGO (image3) --- */}
       <div className="fixed top-6 left-6 z-50">
         <img 
-          src="/marriage_invitation/image3.png" 
+          src="/marriage_invitation/Image3.png" 
           alt="Logo" 
           className="w-12 h-12 md:w-16 md:h-16 object-contain rounded-full border border-white/10 backdrop-blur-md"
           onError={(e) => { e.currentTarget.style.display = 'none'; }}
@@ -121,7 +131,6 @@ export default function WeddingJourney() {
       <section className="relative z-20 py-24 md:py-48 bg-gradient-to-b from-transparent via-[#0a0a0a] to-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-6 space-y-32 md:space-y-48">
           
-          {/* Schooling Story */}
           <motion.div 
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="text-center max-w-2xl mx-auto"
@@ -133,7 +142,6 @@ export default function WeddingJourney() {
             </p>
           </motion.div>
 
-          {/* Milestone 1: First Glance */}
           <motion.div 
             initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true, margin: "-100px" }}
             className="flex flex-col md:flex-row items-center gap-12 md:gap-24"
@@ -151,7 +159,6 @@ export default function WeddingJourney() {
             </div>
           </motion.div>
 
-          {/* Milestone 2: Engagement */}
           <motion.div 
             initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true, margin: "-100px" }}
             className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24"
@@ -220,11 +227,11 @@ export default function WeddingJourney() {
           </div>
         </div>
 
-      
         <div className="flex flex-col md:flex-row gap-4 w-full max-w-xl px-4">
           <a 
-            href="https://maps.app.goo.gl/kBZDpCYQviMytdCJ8" 
+            href="https://maps.app.goo.gl/YourLinkHere" 
             target="_blank" 
+            rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 py-5 bg-amber-600 hover:bg-amber-700 text-white rounded-2xl font-bold tracking-[0.2em] text-[10px] uppercase transition-all shadow-lg active:scale-95"
           >
             <MapPin size={16} /> Locate Venue
@@ -232,9 +239,9 @@ export default function WeddingJourney() {
           <button 
             onClick={downloadInvite}
             disabled={isDownloading}
-            className={`flex-1 flex items-center justify-center gap-2 py-5 rounded-2xl font-bold tracking-[0.2em] text-[10px] uppercase transition-all shadow-lg active:scale-95 ${isDownloading ? 'bg-neutral-500 text-neutral-300' : 'bg-white text-black hover:bg-neutral-100'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-5 rounded-2xl font-bold tracking-[0.2em] text-[10px] uppercase transition-all shadow-lg active:scale-95 ${isDownloading ? 'bg-neutral-500 text-neutral-300 cursor-not-allowed' : 'bg-white text-black hover:bg-neutral-100'}`}
           >
-            {isDownloading ? 'Capturing Full Page...' : <><Download size={16} /> Download Full Journey</>}
+            {isDownloading ? 'Processing...' : <><Download size={16} /> Download Invite</>}
           </button>
         </div>
       </section>
